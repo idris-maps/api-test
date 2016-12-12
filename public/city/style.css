@@ -1,0 +1,10 @@
+html, body { padding: 0; margin: 0; font-family: arial, helvetica, sans-serif; }
+* { box-sizing: border-box; }
+#page { width: 300px; margin: auto; }
+#city { width: 100%; }
+#btn { width: 100%; }
+a { text-decoration: none; color: inherit; }
+img { width: 100%; }
+.title { font-size: 1.2em }
+.desc { font-size: 0.8em }
+
