@@ -40,17 +40,22 @@ var parseItins = require('./parse-itins')
 
 window.onload = function() {
 	document.getElementById('btn').onclick = function() {
-		getItins(document.getElementById('city').value)
+		getItins(document.getElementById('city').value, function(itins) {
+			document.getElementById('choose-itin').innerHTML = parseItins(itins)
+		})
 	}
 }
 
-function getItins(city) {
-	cityPoly(city, function(err, poly) {
-		if(err) { error = err }
-		cityItins(poly, function(err, itins) {
-console.log(itins)
-			document.getElementById('choose-itin').innerHTML = parseItins(itins)
-		})
+function getItins(city, callback) {
+	cityPoly(city, function(err0, poly) {
+		if(err0) { console.log('Error getting OSM polygon', err0); callback([]) }
+		else if(poly === undefined) { callback([]) } 
+		else {
+			cityItins(poly, function(err1, data) {
+				if(err1) { console.log('Error getting Snukr itineraries', err1); callback([]) }
+				else { callback(data) }
+			})
+		} 
 	})
 }
 
@@ -70,10 +75,8 @@ function itinHTML(d) {
 	return '<a href="/itin#' + d.id + '">'
 	+ '<div class="itin-item">'
 		+ '<img src="http://' + d.picture.cdnPath + '/' + d.picture.keys[3] + '">'
-		+ '<div class="over">'
-			+ '<p class="title">' + d.translates.name + '</p>'
-			+ '<p class="desc">' + d.translates.description + '</p>'
-		+ '</div>'
+		+ '<p class="title">' + d.translates.name + '</p>'
+		//+ '<p class="desc">' + d.translates.description + '</p>'
 	+ '</div>'
 + '</a>'
 }

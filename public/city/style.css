@@ -1,10 +1,31 @@
 html, body { padding: 0; margin: 0; font-family: arial, helvetica, sans-serif; }
 * { box-sizing: border-box; }
 #page { width: 300px; margin: auto; }
+#choose-city, #choose-itin { margin-top: 20px; }
 #city { width: 100%; }
 #btn { width: 100%; }
 a { text-decoration: none; color: inherit; }
 img { width: 100%; }
-.title { font-size: 1.2em }
+.itin-item { position: relative; margin-top: 1px; height: 115px; overflow: hidden; }
+.title { 
+	font-size: 1.2em; 
+	position: absolute;
+	top: 40px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: rgba(0,0,0,0.5);
+}
 .desc { font-size: 0.8em }
 
+@media (min-width: 603px) {
+	#page { width: 602px }
+	.itin-item { width: 300px; float: left; margin-left: 1px; }
+	#city, #btn { width: 250px; }
+}
+@media (min-width: 904px) {
+	#page { width: 903px }
+}
+@media (min-width: 1205px) {
+	#page { width: 1204px }
+}
